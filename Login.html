@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b111a; /* dark navy background from logo */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007bff; /* logo blue */
+      margin-bottom: 10px;
+    }
+
+    input[type="text"], input[type="password"], select {
+      width: 220px;
+      padding: 10px;
+      font-size: 14px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background: #007bff; /* logo blue */
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3; /* darker blue on hover */
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .role-label {
+      font-weight: bold;
+      color: #0b111a;
+    }
+
+    .role-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .role-buttons button {
+      width: 180px;
+      background: #007bff; /* logo blue */
+      color: #fff;
+    }
+
+    .role-buttons button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Left side -->
+    <div class="left">
+      <div class="logo">Login</div>
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+      <button onclick="window.location.href='dashboard.html'">LOGIN</button>
+    </div>
+
+    <!-- Right side -->
+    <div class="right">
+      <div class="role-label">Role:</div>
+      <select>
+        <option>Individual</option>
+        <option>Team Manager</option>
+      </select>
+      <div class="role-buttons">
+        <button>Individual</button>
+        <button>Team Manager</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
