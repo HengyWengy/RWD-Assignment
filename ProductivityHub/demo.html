@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity Hub - Demo</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .demo-section {
+      margin: 30px 0;
+      padding: 20px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      border-left: 4px solid #007bff;
+    }
+    .demo-section h3 {
+      margin-top: 0;
+      color: #0b111a;
+    }
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      margin: 10px 0;
+    }
+    .output {
+      background: #fff;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 10px 0;
+      border: 2px solid #007bff;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .feature-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-top: 4px solid #007bff;
+    }
+    .feature-card h4 {
+      margin-top: 0;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="ProductivityHub.toggleSidebar()">☰</button>
+
+  <div class="sidebar">
+    <div class="logo-text">📊 Demo</div>
+    <div class="menu">
+      <button onclick="scrollToSection('overview')">Overview</button>
+      <button onclick="scrollToSection('features')">Features</button>
+      <button onclick="scrollToSection('demo')">Live Demo</button>
+      <button onclick="scrollToSection('code')">Code Examples</button>
+      <button onclick="scrollToSection('usage')">How to Use</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h1>🎯 Productivity Hub - Demo & Explanation</h1>
+      <div class="user-info">
+        <div class="user-name" id="userNameDisplay">Demo User</div>
+        <div class="avatar">D</div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW SECTION -->
+    <div id="overview" class="card">
+      <h2>📖 What is Productivity Hub?</h2>
+      <p>Productivity Hub is a complete web application for managing tasks, goals, and team collaboration. It uses:</p>
+      <ul>
+        <li><strong>HTML5</strong> - Semantic markup</li>
+        <li><strong>CSS3</strong> - Responsive design (mobile, tablet, desktop)</li>
+        <li><strong>JavaScript</strong> - Interactive functionality</li>
+        <li><strong>LocalStorage</strong> - Client-side data storage</li>
+        <li><strong>PHP</strong> - Server-side processing</li>
+        <li><strong>MySQL</strong> - Database management</li>
+      </ul>
+    </div>
+
+    <!-- FEATURES SECTION -->
+    <div id="features" class="card">
+      <h2>✨ Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>📋 Task Management</h4>
+          <p>Create, edit, and delete tasks with deadlines, progress tracking, and status management.</p>
+        </div>
+        <div class="feature-card">
+          <h4>🎯 Goal Setting</h4>
+          <p>Set and track long-term and short-term goals with progress visualization.</p>
+        </div>
+        <div class="feature-card">
+          <h4>⏱️ Time Tracking</h4>
+          <p>Track time spent on tasks and view time distribution across team members.</p>
+        </div>
+        <div class="feature-card">
+          <h4>💬 Team Chat</h4>
+          <p>Real-time team communication with message history and notifications.</p>
+        </div>
+        <div class="feature-card">
+          <h4>📊 Analytics</h4>
+          <p>Visual charts, statistics, and productivity insights with export functionality.</p>
+        </div>
+        <div class="feature-card">
+          <h4>👥 Collaboration</h4>
+          <p>Share tasks, manage team members, and collaborate on projects.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE DEMO SECTION -->
+    <div id="demo" class="card">
+      <h2>🎮 Live Demo - Try It Now!</h2>
+      
+      <div class="demo-section">
+        <h3>1. Create a Task</h3>
+        <p>Add a new task to your task list:</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+          <div>
+            <input type="text" id="demoTaskName" placeholder="Task name" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="text" id="demoTaskOwner" placeholder="Owner name" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="date" id="demoTaskDate" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <button class="btn btn-primary" onclick="addDemoTask()" style="width: 100%;">➕ Add Task</button>
+          </div>
+          <div>
+            <h4>Your Tasks:</h4>
+            <div id="demoTaskList" style="max-height: 300px; overflow-y: auto;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h3>2. Send a Chat Message</h3>
+        <p>Test the chat functionality:</p>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="demoChatInput" placeholder="Type a message..." style="flex: 1; padding: 10px;">
+          <button class="btn btn-success" onclick="addDemoMessage()">Send</button>
+        </div>
+        <div id="demoChatBox" style="background: #f9f9f9; padding: 15px; border-radius: 6px; margin-top: 10px; max-height: 200px; overflow-y: auto; border: 1px solid #ddd;"></div>
+      </div>
+
+      <div class="demo-section">
+        <h3>3. View Statistics</h3>
+        <button class="btn btn-primary" onclick="showDemoStats()">📊 Show Statistics</button>
+        <div id="demoStats" style="margin-top: 15px;"></div>
+      </div>
+    </div>
+
+    <!-- CODE EXAMPLES SECTION -->
+    <div id="code" class="card">
+      <h2>💻 JavaScript Code Examples</h2>
+
+      <div class="demo-section">
+        <h3>Example 1: Get All Tasks</h3>
+        <div class="code-block">const tasks = ProductivityHub.getTasks()
+console.log(tasks)
+// Returns array of all tasks</div>
+        <p><strong>Output:</strong></p>
+        <div class="output" id="example1Output">Click button to run</div>
+        <button class="btn btn-primary" onclick="runExample1()">Run Example 1</button>
+      </div>
+
+      <div class="demo-section">
+        <h3>Example 2: Create a Task</h3>
+        <div class="code-block">ProductivityHub.addTask({
+  title: 'New Task',
+  type: 'Assignment',
+  owner: 'John',
+  deadline: '2025-11-20'
+})</div>
+        <button class="btn btn-primary" onclick="runExample2()">Run Example 2</button>
+      </div>
+
+      <div class="demo-section">
+        <h3>Example 3: Get Statistics</h3>
+        <div class="code-block">const stats = ProductivityHub.getProductivityStats()
+console.log(`Completed: ${stats.completed}/${stats.total}`)</div>
+        <p><strong>Output:</strong></p>
+        <div class="output" id="example3Output">Click button to run</div>
+        <button class="btn btn-primary" onclick="runExample3()">Run Example 3</button>
+      </div>
+
+      <div class="demo-section">
+        <h3>Example 4: Filter Tasks</h3>
+        <div class="code-block">const completed = ProductivityHub.filterTasks({ 
+  status: 'Completed' 
+})</div>
+        <p><strong>Output:</strong></p>
+        <div class="output" id="example4Output">Click button to run</div>
+        <button class="btn btn-primary" onclick="runExample4()">Run Example 4</button>
+      </div>
+
+      <div class="demo-section">
+        <h3>Example 5: Show Notification</h3>
+        <div class="code-block">ProductivityHub.showNotification('Task saved!', 'success')</div>
+        <button class="btn btn-success" onclick="runExample5()">Run Example 5 (Success)</button>
+        <button class="btn btn-danger" onclick="runExample5Error()">Run Example 5 (Error)</button>
+      </div>
+    </div>
+
+    <!-- USAGE SECTION -->
+    <div id="usage" class="card">
+      <h2>📚 How to Use This Application</h2>
+
+      <div class="demo-section">
+        <h3>Step 1: Setup</h3>
+        <ol>
+          <li>Extract ProductivityHub-Complete.zip</li>
+          <li>Copy folder to web server (XAMPP, WAMP, etc.)</li>
+          <li>Create database and import tasks.sql</li>
+          <li>Edit db_connect.php with your credentials</li>
+        </ol>
+      </div>
+
+      <div class="demo-section">
+        <h3>Step 2: Access Application</h3>
+        <ol>
+          <li>Start Apache and MySQL</li>
+          <li>Open: http://localhost/ProductivityHub-Complete/</li>
+          <li>Create account or login</li>
+          <li>Start adding tasks!</li>
+        </ol>
+      </div>
+
+      <div class="demo-section">
+        <h3>Step 3: Explore Features</h3>
+        <ul>
+          <li><strong>Dashboard:</strong> View all tasks overview</li>
+          <li><strong>Tasks:</strong> Create and manage tasks</li>
+          <li><strong>Goals:</strong> Track goals and progress</li>
+          <li><strong>Collaboration:</strong> Chat and share tasks</li>
+          <li><strong>Analytics:</strong> View statistics and charts</li>
+        </ul>
+      </div>
+
+      <div class="demo-section">
+        <h3>Responsive Design Testing</h3>
+        <p>Test on different screen sizes:</p>
+        <ul>
+          <li><strong>Desktop (1920px):</strong> Full layout with all features</li>
+          <li><strong>Tablet (768px):</strong> Adapted layout, collapsible sidebar</li>
+          <li><strong>Mobile (375px):</strong> Touch-optimized, hamburger menu</li>
+        </ul>
+        <p><strong>How to test:</strong> Press F12 in browser, click device toolbar (Ctrl+Shift+M), select device</p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="card" style="background: #f0f0f0; text-align: center;">
+      <h3>🚀 Ready to Use?</h3>
+      <p>Download ProductivityHub-Complete.zip and follow the installation guide!</p>
+      <p style="color: #666; font-size: 14px;">All CSS and JavaScript files are included and ready to use.</p>
+    </div>
+  </div>
+
+  <!-- Load JavaScript -->
+  <script src="js/script.js"></script>
+  
+  <script>
+    // Demo Functions
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function addDemoTask() {
+      const name = document.getElementById('demoTaskName').value;
+      const owner = document.getElementById('demoTaskOwner').value;
+      const date = document.getElementById('demoTaskDate').value;
+
+      if (!name || !owner || !date) {
+        alert('Please fill all fields!');
+        return;
+      }
+
+      ProductivityHub.addTask({
+        title: name,
+        owner: owner,
+        deadline: date,
+        type: 'Demo',
+        status: 'Pending',
+        progress: 0
+      });
+
+      // Clear inputs
+      document.getElementById('demoTaskName').value = '';
+      document.getElementById('demoTaskOwner').value = '';
+      document.getElementById('demoTaskDate').value = '';
+
+      // Refresh list
+      renderDemoTasks();
+      ProductivityHub.showNotification('Task added!', 'success');
+    }
+
+    function renderDemoTasks() {
+      const taskList = document.getElementById('demoTaskList');
+      const tasks = ProductivityHub.getTasks();
+
+      taskList.innerHTML = '';
+      if (tasks.length === 0) {
+        taskList.innerHTML = '<p style="color: #999;">No tasks yet</p>';
+        return;
+      }
+
+      tasks.forEach(task => {
+        const div = document.createElement('div');
+        div.className = 'task-item';
+        div.innerHTML = `
+          <div style="flex: 1;">
+            <strong>${ProductivityHub.escapeHtml(task.title)}</strong><br>
+            <small style="color: #666;">${task.owner} - ${ProductivityHub.formatDate(task.deadline)}</small>
+          </div>
+          <span style="background: #007bff; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">${task.status}</span>
+        `;
+        taskList.appendChild(div);
+      });
+    }
+
+    function addDemoMessage() {
+      const text = document.getElementById('demoChatInput').value;
+      if (!text.trim()) return;
+
+      ProductivityHub.sendChatMessage(text);
+      document.getElementById('demoChatInput').value = '';
+      renderDemoChat();
+    }
+
+    function renderDemoChat() {
+      const chatBox = document.getElementById('demoChatBox');
+      const messages = ProductivityHub.getChatMessages ? 
+        JSON.parse(localStorage.getItem('chatMessages') || '[]') : [];
+
+      chatBox.innerHTML = '';
+      messages.slice(-10).forEach(msg => {
+        const div = document.createElement('div');
+        div.style.marginBottom = '10px';
+        div.style.padding = '8px';
+        div.style.background = '#fff';
+        div.style.borderRadius = '4px';
+        div.innerHTML = `<strong>${ProductivityHub.escapeHtml(msg.user)}:</strong> ${ProductivityHub.escapeHtml(msg.text)}`;
+        chatBox.appendChild(div);
+      });
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showDemoStats() {
+      const stats = ProductivityHub.getProductivityStats();
+      const statsDiv = document.getElementById('demoStats');
+
+      statsDiv.innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+          <div style="background: #fff; padding: 15px; border-radius: 6px; text-align: center; border-left: 4px solid #007bff;">
+            <div style="font-size: 24px; font-weight: bold; color: #007bff;">${stats.total}</div>
+            <div style="color: #666; font-size: 12px;">Total Tasks</div>
+          </div>
+          <div style="background: #fff; padding: 15px; border-radius: 6px; text-align: center; border-left: 4px solid #28a745;">
+            <div style="font-size: 24px; font-weight: bold; color: #28a745;">${stats.completed}</div>
+            <div style="color: #666; font-size: 12px;">Completed</div>
+          </div>
+          <div style="background: #fff; padding: 15px; border-radius: 6px; text-align: center; border-left: 4px solid #ffc107;">
+            <div style="font-size: 24px; font-weight: bold; color: #ffc107;">${stats.inProgress}</div>
+            <div style="color: #666; font-size: 12px;">In Progress</div>
+          </div>
+          <div style="background: #fff; padding: 15px; border-radius: 6px; text-align: center; border-left: 4px solid #17a2b8;">
+            <div style="font-size: 24px; font-weight: bold; color: #17a2b8;">${stats.averageProgress}%</div>
+            <div style="color: #666; font-size: 12px;">Avg Progress</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Code Examples
+    function runExample1() {
+      const tasks = ProductivityHub.getTasks();
+      const output = document.getElementById('example1Output');
+      output.innerHTML = `<pre>${JSON.stringify(tasks, null, 2)}</pre>`;
+    }
+
+    function runExample2() {
+      ProductivityHub.addTask({
+        title: 'Example Task',
+        type: 'Assignment',
+        owner: 'Demo User',
+        deadline: new Date().toISOString().split('T')[0]
+      });
+      renderDemoTasks();
+      ProductivityHub.showNotification('Example task created!', 'success');
+    }
+
+    function runExample3() {
+      const stats = ProductivityHub.getProductivityStats();
+      const output = document.getElementById('example3Output');
+      output.innerHTML = `
+        <strong>Statistics:</strong><br>
+        Total: ${stats.total}<br>
+        Completed: ${stats.completed}<br>
+        In Progress: ${stats.inProgress}<br>
+        Pending: ${stats.pending}<br>
+        Average Progress: ${stats.averageProgress}%
+      `;
+    }
+
+    function runExample4() {
+      const completed = ProductivityHub.filterTasks({ status: 'Completed' });
+      const output = document.getElementById('example4Output');
+      if (completed.length === 0) {
+        output.innerHTML = 'No completed tasks yet.';
+      } else {
+        output.innerHTML = `<strong>Completed Tasks (${completed.length}):</strong><br>` +
+          completed.map(t => `• ${t.title}`).join('<br>');
+      }
+    }
+
+    function runExample5() {
+      ProductivityHub.showNotification('Task saved successfully!', 'success');
+    }
+
+    function runExample5Error() {
+      ProductivityHub.showNotification('An error occurred!', 'error');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDemoTasks();
+      renderDemoChat();
+    });
+  </script>
+</body>
+</html>
+
